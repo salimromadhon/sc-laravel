@@ -20,3 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/about', function () {
+    $title = 'Salim Romadhon';
+    return view('welcome', compact('title'));
+})->name('about');
