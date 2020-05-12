@@ -25,3 +25,5 @@ Route::get('/about', function () {
     $title = 'Salim Romadhon';
     return view('welcome', compact('title'));
 })->name('about');
+
+Route::resource('/mahasiswa', 'MahasiswaController');
