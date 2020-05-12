@@ -42,7 +42,7 @@ class MahasiswaController extends Controller
     {
         $data = $request->validated();
 
-        if (Mahasiswa::insert($data)) {
+        if (Mahasiswa::create($data)) {
             alert('mahasiswa', 'Sukses menyimpan data.', 'success');
         } else {
             alert('mahasiswa', 'Gagal menyimpan data.', 'danger');
