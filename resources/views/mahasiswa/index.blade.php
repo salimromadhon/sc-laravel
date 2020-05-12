@@ -8,7 +8,11 @@
                 <div class="card-header">Mahasiswa</div>
 
                 <div class="card-body">
-                    <table class="table">
+                    {!! alert('mahasiswa') !!}
+                    <div class="mb-3">
+                        <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Tambah</a>
+                    </div>
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -29,11 +33,13 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->jurusan }}</td>
                                         <td>
-                                            <div class="btn-group btn-group-sm">
-                                                <a href="{{ route('mahasiswa.show', $item->id) }}" class="btn btn-outline-secondary">Lihat</a>
-                                                <a href="{{ route('mahasiswa.edit', $item->id) }}" class="btn btn-outline-secondary">Sunting</a>
-                                                <a href="{{ route('mahasiswa.destroy', $item->id) }}" class="btn btn-outline-secondary">Hapus</a>
-                                            </div>
+                                            <a href="{{ route('mahasiswa.show', $item->id) }}" class="btn btn-sm btn-outline-secondary">Lihat</a>
+                                            <a href="{{ route('mahasiswa.edit', $item->id) }}" class="btn btn-sm btn-outline-secondary">Sunting</a>
+                                            <form class="d-inline delete-mahasiswa" method="post" action="{{ route('mahasiswa.destroy', $item->id) }}">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary">Hapus</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -41,7 +47,7 @@
                                 <tr>
                                     <td colspan="6">
                                         <div class="alert alert-warning">
-                                            Tidak ada mahasiswa. Silakan jalankan <code>php artisan db:seed</code> terlebih dahulu.
+                                            Tidak ada mahasiswa. Silakan tambah mahasiswa atau jalankan <code>php artisan db:seed</code> terlebih dahulu.
                                         </div>
                                     </td>
                                 </tr>

@@ -10,6 +10,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script>
+        const alert = {!! ($alert = session('alert_alert')) ? json_encode(array(
+            'message' => isset($alert[0]) ? $alert[0] : '',
+            'type' => isset($alert[1]) ? $alert[1] : '',
+        )) : 'undefined' !!};
+    </script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->

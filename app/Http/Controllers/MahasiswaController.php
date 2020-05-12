@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mahasiswa;
 use Illuminate\Http\Request;
+use App\Http\Requests\MahasiswaStore;
 
 class MahasiswaController extends Controller
 {
@@ -26,7 +27,9 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $jurusan = Mahasiswa::getAllJurusan();
+
+        return view('mahasiswa.create', compact('jurusan'));
     }
 
     /**
@@ -35,9 +38,17 @@ class MahasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MahasiswaStore $request)
     {
-        //
+        $data = $request->validated();
+
+        if (Mahasiswa::insert($data)) {
+            alert('mahasiswa', 'Sukses menyimpan data.', 'success');
+        } else {
+            alert('mahasiswa', 'Gagal menyimpan data.', 'danger');
+        }
+
+        return redirect('/mahasiswa');
     }
 
     /**
@@ -48,7 +59,7 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
-        //
+        return view('mahasiswa.show', compact('mahasiswa'));
     }
 
     /**
@@ -59,7 +70,9 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        $jurusan = Mahasiswa::getAllJurusan();
+
+        return view('mahasiswa.edit', compact('mahasiswa', 'jurusan'));
     }
 
     /**
@@ -69,9 +82,17 @@ class MahasiswaController extends Controller
      * @param  \App\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update(MahasiswaStore $request, Mahasiswa $mahasiswa)
     {
-        //
+        $data = $request->validated();
+
+        if ($mahasiswa->update($data)) {
+            alert('mahasiswa', 'Sukses memperbarui data.', 'success');
+        } else {
+            alert('mahasiswa', 'Gagal memperbarui data.', 'danger');
+        }
+
+        return redirect('/mahasiswa');
     }
 
     /**
@@ -82,6 +103,12 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        if ($mahasiswa->delete()) {
+            alert('alert', 'Sukses menghapus data.', 'success');
+        } else {
+            alert('alert', 'Gagal menghapus data.', 'danger');
+        }
+
+        return redirect('/mahasiswa');
     }
 }

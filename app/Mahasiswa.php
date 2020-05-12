@@ -12,4 +12,15 @@ class Mahasiswa extends Model
         'email',
         'jurusan',
     ];
+
+    public static function getAllJurusan()
+    {
+        return [
+            'Komputer',
+            'Akuntansi',
+            'Geografi',
+            'Mesin',
+            'Farmasi',
+        ];
+    }
 }
